@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="157dp"
+    android:elevation="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/attendance" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:hint="Attendance Code"
+        android:inputType="textPersonName" />
+
+</LinearLayout>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:scrollbars="horizontal"
+    tools:context=".sinupTeacher">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/back_singUP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="backbtn"
+                    android:src="@drawable/back" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/century_gothic"
+                    android:text="BACK"
+                    android:onClick="backbtn"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="7dp"
+                android:background="#fff"
+                android:elevation="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/century_gothic"
+                        android:gravity="center"
+                        android:text="Create a Teacher Account"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:fontFamily="@font/century_gothic"
+                        android:text="Full Name *" />
+
+                    <EditText
+                        android:id="@+id/Teacher_Fname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:drawableRight="@drawable/name"
+                        android:fontFamily="@font/century_gothic"
+                        android:hint="Omar"
+
+                        android:inputType="textPersonName" />
+                    <TextView
+                        android:id="@+id/textView154"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:fontFamily="@font/century_gothic"
+                        android:text="Last name *" />
+
+                    <EditText
+                        android:id="@+id/Teacher_Lname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:drawableRight="@drawable/name"
+                        android:fontFamily="@font/century_gothic"
+                        android:hint="Ayman"
+
+                        android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:fontFamily="@font/century_gothic"
+                        android:text="Phone number" />
+
+                    <EditText
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:drawableRight="@drawable/phone"
+                        android:fontFamily="@font/century_gothic"
+                        android:hint="01xxxxxxxxx"
+                        android:inputType="phone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:fontFamily="@font/century_gothic"
+                            android:text="Email" />
+
+                        <EditText
+                            android:id="@+id/Teacher_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:drawableRight="@drawable/email"
+                            android:fontFamily="@font/century_gothic"
+                            android:hint="email@gmail.com"
+                            android:inputType="textEmailAddress" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:fontFamily="@font/century_gothic"
+                            android:text="Password" />
+
+                        <EditText
+                            android:id="@+id/Teacher_pass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:drawableRight="@drawable/password"
+                            android:fontFamily="@font/century_gothic"
+                            android:hint="****************"
+                            android:inputType="textPassword" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:fontFamily="@font/century_gothic"
+                            android:text="Confirm Password" />
+
+                        <EditText
+                            android:id="@+id/Teacher_conf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:drawableRight="@drawable/password"
+                            android:fontFamily="@font/century_gothic"
+                            android:hint="****************"
+                            android:inputType="textPassword" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:drawableRight="@drawable/city"
+                            android:fontFamily="@font/century_gothic"
+                            android:text="city" />
+
+                        <Spinner
+                            android:id="@+id/Teacher_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:fontFamily="@font/century_gothic"
+                            android:gravity="center"
+                            android:text="I Read and agree to Terms And Conditions"
+                            android:textColor="#F5711C" />
+
+                        <Button
+                            android:id="@+id/Teacher_reg"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/roundedbutton"
+                            android:fontFamily="@font/century_gothic"
+                            android:text="Register Now"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout2"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:fontFamily="@font/century_gothic"
+                    android:text="Already Registered?"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/signIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/century_gothic"
+                    android:text=" Sign In"
+                    android:textColor="#F5711C" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

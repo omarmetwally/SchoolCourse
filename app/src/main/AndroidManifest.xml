@@ -2,20 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.omarmetwally.schoolcourse">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="center"
+        android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".student.MainActivity" />
+        <activity android:name=".signIn" />
+        <activity
+            android:name=".startup"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".signupStudent" />
+        <activity android:name=".sinupTeacher" />
+        <activity android:name=".signup2" />
+        <activity android:name=".student.TeacherSearch" />
+        <activity android:name=".student.Main2Activity" />
+        <activity android:name=".student.teacherSelection" />
+        <activity android:name=".student.Search_City" />
+        <activity
+            android:name=".teacher.TeacherMain"
+            android:label="@string/title_activity_teacher_main"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+
+        </activity>
+        <activity android:name=".signInTeacher"></activity>
     </application>
 
 </manifest>

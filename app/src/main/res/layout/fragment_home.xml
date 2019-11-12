@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/background"
+
+    tools:context=".student.HomeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+
+        >
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="10dp"
+
+            android:text="LOGO"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            />
+
+        <Button
+            android:id="@+id/search_techeeer"
+            android:layout_width="242dp"
+            android:layout_height="59dp"
+
+            android:elevation="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/roundedbutton2"
+            android:fontFamily="@font/century_gothic"
+            android:text="Search By Teacher" />
+
+        <Button
+            android:id="@+id/citybtn"
+            android:layout_width="242dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/roundedbutton2"
+            android:elevation="50dp"
+            android:fontFamily="@font/century_gothic"
+            android:text="Search By Center/City" />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

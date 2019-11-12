@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="8dp"
+        android:background="#fff"
+        android:clickable="true"
+        android:elevation="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+           android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+
+                app:srcCompat="@drawable/hassan" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/centNameapply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Center Name"
+                    android:textColor="#F67F21"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/phone"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+
+
+            android:layout_gravity="right|center"
+
+            android:paddingRight="5dp"
+            app:srcCompat="@drawable/phone2" />
+    </FrameLayout>
+
+</RelativeLayout>
