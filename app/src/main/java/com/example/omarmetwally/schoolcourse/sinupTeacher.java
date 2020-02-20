@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.omarmetwally.schoolcourse.student.Main2Activity;
 import com.example.omarmetwally.schoolcourse.student.Student_main;
+import com.example.omarmetwally.schoolcourse.teacher.TeacherMain;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,7 +143,7 @@ public class sinupTeacher extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-                                        startActivity(new Intent(sinupTeacher.this,Student_main.class));
+                                        startActivity(new Intent(sinupTeacher.this,TeacherMain.class));
                                     }
                                 });
 
