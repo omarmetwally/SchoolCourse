@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public  class GetTeacher {
 
-    private  String tid,tFirstName,tLastName;
+    private  String tid,firstName,lastName;
 
     ArrayList<String> subject,city,stageName;
 
@@ -41,19 +41,19 @@ public  class GetTeacher {
         this.subject = subject;
     }
 
-    public void settFirstName(String tFirstName) {
-        this.tFirstName = tFirstName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void settLastName(String tLastName) {
-        this.tLastName = tLastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String gettFirstName() {
-        return tFirstName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String gettLastName() {
-        return tLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.omarmetwally.schoolcourse;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.omarmetwally.schoolcourse.student.Main2Activity;
+import com.example.omarmetwally.schoolcourse.student.Student_main;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +27,9 @@ public class signIn extends AppCompatActivity {
     TextView regi;
     TextView sign;
     boolean in=false;
+    String tkk;
     private  Api a;
+    public static final String MY_Token = "Token";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +117,7 @@ public class signIn extends AppCompatActivity {
         }
 
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/User/")
+                .baseUrl("https://stc-api.herokuapp.com/api/User/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         a= retrofit.create(Api.class);
@@ -127,22 +132,55 @@ public class signIn extends AppCompatActivity {
             public void onResponse(Call<UserLoginPost> call, Response<UserLoginPost> response) {
 
 
-              
-               if(!response.isSuccessful())
+
+
+                if(response.body()!=null)
+                 tkk=response.body().getToken();
+               // Toast.makeText(signIn.this," "+tkk,Toast.LENGTH_LONG).show();
+
+
+                SharedPreferences.Editor editor = getSharedPreferences("token", MODE_PRIVATE).edit();
+                editor.putString("token", tkk);
+                editor.apply();
+
+
+
+                if(!response.isSuccessful())
                 {
                     user.setError("Email or password is wrong");
                     user.requestFocus();
                     return;
 
                 }
-                startActivity(new Intent(signIn.this,Main2Activity.class));
+
+
+
+
+
+
+
+                Intent i = new Intent(signIn.this, Student_main.class);
+
+                i.putExtra("token", tkk);
+
+                startActivity(i);
+
+
+
+
+
+
+
+
+                //startActivity(new Intent(signIn.this,Student_main.class));
             }
 
             @Override
             public void onFailure(Call<UserLoginPost> call, Throwable t) {
 
 
-                startActivity(new Intent(signIn.this,Main2Activity.class));
+                Toast.makeText(signIn.this,"Check your internet connection",Toast.LENGTH_LONG).show();
+                //startActivity(new Intent(signIn.this,Student_main.class));
 
 
                // startActivity(new Intent(signIn.this,TeacherSearch.class));

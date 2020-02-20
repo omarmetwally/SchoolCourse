@@ -1,5 +1,6 @@
 package com.example.omarmetwally.schoolcourse.teacher;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -23,14 +24,20 @@ import com.example.omarmetwally.schoolcourse.student.mycourses_adapter;
 import com.example.omarmetwally.schoolcourse.student.mycourses_getdata;
 import com.example.omarmetwally.schoolcourse.student.teacherSelection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Fragment_public extends Fragment {
 
@@ -95,11 +102,31 @@ public class Fragment_public extends Fragment {
         mreRecyclerView.removeAllViews();
         String sssss="9b3dbc75-feb5-416e-baec-e5e560f1ce5e";
 
+        SharedPreferences prefs = getActivity().getSharedPreferences("token", MODE_PRIVATE);
+        final String Auth="Bearer "+ prefs.getString("token",null);
+
         loadingScreen.show(getFragmentManager(),"loading Screen");
 
+
+        OkHttpClient okHttpClient=new OkHttpClient.Builder().
+                addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request original=chain.request();
+
+                        Request.Builder requestBilder=original.newBuilder()
+                                .addHeader("Authorization",Auth)
+                                .method(original.method(),original.body());
+
+                        Request request=requestBilder.build();
+
+                        return chain.proceed(request);
+                    }
+                }).build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455//api/classes/SeeAllCenterClasses/"+sssss+"/")
+                .baseUrl("https://stc-api.herokuapp.com//api/classes/SeeAllCenterClasses/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<public_privateClassesContent>> call=a.content();

@@ -2,6 +2,7 @@ package com.example.omarmetwally.schoolcourse;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.omarmetwally.schoolcourse.student.Main2Activity;
+import com.example.omarmetwally.schoolcourse.student.Student_main;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +32,7 @@ public class sinupTeacher extends AppCompatActivity {
     EditText Fname,Lname,email,password,confpass;
     Spinner city,region;
     Button reg;
+    String tkk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class sinupTeacher extends AppCompatActivity {
 
 
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/User/")
+                .baseUrl("https://stc-api.herokuapp.com/api/User/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         a= retrofit.create(Api.class);
@@ -130,26 +133,6 @@ public class sinupTeacher extends AppCompatActivity {
             public void onResponse(Call<UserRegPost> call, Response<UserRegPost> response) {
 
 
-                //String s= response.body().toString();
-                if(!response.isSuccessful())
-                {
-                    email.setError("Email is exist");
-                    email.requestFocus();
-                    return;
-
-                }
-
-                Toast.makeText(sinupTeacher.this,"Faild registration",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<UserRegPost> call, Throwable t) {
-                // Toast.makeText(signupStudent.this,t.getMessage(),Toast.LENGTH_LONG).show();
-               // Toast.makeText(sinupTeacher.this,"Successful registration",Toast.LENGTH_LONG).show();
-
-
-
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(sinupTeacher.this);
                 alertDialogBuilder.setTitle("Teacher Registration");
                 alertDialogBuilder
@@ -159,12 +142,42 @@ public class sinupTeacher extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-                                        startActivity(new Intent(sinupTeacher.this,Main2Activity.class));
+                                        startActivity(new Intent(sinupTeacher.this,Student_main.class));
                                     }
                                 });
 
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+
+                //String s= response.body().toString();
+                if(!response.isSuccessful())
+                {
+                    email.setError("Email is exist");
+                    email.requestFocus();
+                    return;
+
+                }
+
+                if(response.body()!=null)
+                    tkk=response.body().getToken();
+                // Toast.makeText(signIn.this," "+tkk,Toast.LENGTH_LONG).show();
+
+
+                SharedPreferences.Editor editor = getSharedPreferences("token", MODE_PRIVATE).edit();
+                editor.putString("token", tkk);
+                editor.apply();
+
+            }
+
+            @Override
+            public void onFailure(Call<UserRegPost> call, Throwable t) {
+                // Toast.makeText(signupStudent.this,t.getMessage(),Toast.LENGTH_LONG).show();
+               // Toast.makeText(sinupTeacher.this,"Successful registration",Toast.LENGTH_LONG).show();
+
+
+                Toast.makeText(sinupTeacher.this,"Faild registration",Toast.LENGTH_LONG).show();
+
+
 
 
 

@@ -4,7 +4,7 @@ public class centerGetData {
 
     String centerId,firstname;
 
-    public String getCenterId() {
+     String getCenterId() {
         return centerId;
     }
 

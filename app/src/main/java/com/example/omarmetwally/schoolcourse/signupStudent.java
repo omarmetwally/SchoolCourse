@@ -1,6 +1,7 @@
 package com.example.omarmetwally.schoolcourse;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.omarmetwally.schoolcourse.student.Main2Activity;
+import com.example.omarmetwally.schoolcourse.student.Student_main;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +29,7 @@ public class signupStudent extends AppCompatActivity {
     EditText Fname,Lname,email,password,confpass;
     Spinner city,stage;
     Button reg;
+    String tkk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,7 @@ public class signupStudent extends AppCompatActivity {
 
 
          Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/User/")
+                .baseUrl("https://stc-api.herokuapp.com/api/User/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
           a= retrofit.create(Api.class);
@@ -175,15 +178,26 @@ public class signupStudent extends AppCompatActivity {
 
                 }
 
-                    Toast.makeText(signupStudent.this,"faild registration",Toast.LENGTH_LONG).show();
+
+                if(response.body()!=null)
+                    tkk=response.body().getToken();
+                // Toast.makeText(signIn.this," "+tkk,Toast.LENGTH_LONG).show();
+
+
+                SharedPreferences.Editor editor = getSharedPreferences("token", MODE_PRIVATE).edit();
+                editor.putString("token", tkk);
+                editor.apply();
+
+
+                startActivity(new Intent(signupStudent.this,Student_main.class));
+
             }
 
             @Override
             public void onFailure(Call<UserRegPost> call, Throwable t) {
                // Toast.makeText(signupStudent.this,t.getMessage(),Toast.LENGTH_LONG).show();
-                Toast.makeText(signupStudent.this,"Successful registration",Toast.LENGTH_LONG).show();
+                Toast.makeText(signupStudent.this,"check your internet",Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(signupStudent.this,Main2Activity.class));
 
             }
         });

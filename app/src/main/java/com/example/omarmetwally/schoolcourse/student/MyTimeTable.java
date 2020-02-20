@@ -1,5 +1,6 @@
 package com.example.omarmetwally.schoolcourse.student;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,14 +16,20 @@ import android.widget.Toast;
 import com.example.omarmetwally.schoolcourse.Api;
 import com.example.omarmetwally.schoolcourse.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MyTimeTable extends Fragment {
 
@@ -45,6 +52,10 @@ public class MyTimeTable extends Fragment {
         vv= inflater.inflate(R.layout.fragment_mytimetable, container, false);
 
         String sssss="601bfff3-af9f-4312-ad87-504bd13cc578";
+
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("token", MODE_PRIVATE);
+        final  String Auth="Bearer "+ prefs.getString("token",null);
+
 
         d1=vv.findViewById(R.id.d1);
         d2=vv.findViewById(R.id.d2);
@@ -89,11 +100,26 @@ public class MyTimeTable extends Fragment {
         rec7.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
+        OkHttpClient okHttpClient=new OkHttpClient.Builder().
+                addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request original=chain.request();
 
+                        Request.Builder requestBilder=original.newBuilder()
+                                .addHeader("Authorization",Auth)
+                                .method(original.method(),original.body());
+
+                        Request request=requestBilder.build();
+
+                        return chain.proceed(request);
+                    }
+                }).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/UserSelection/AllTimeTableStundet/"+sssss+"/")
+                .baseUrl("https://stc-api.herokuapp.com/api/UserSelection/AllTimeTableStundet/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<MyTimeTableGetData>> call=a.mytimetable();

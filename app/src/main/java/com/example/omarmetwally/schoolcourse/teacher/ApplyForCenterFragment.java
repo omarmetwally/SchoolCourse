@@ -1,5 +1,6 @@
 package com.example.omarmetwally.schoolcourse.teacher;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.example.omarmetwally.schoolcourse.student.LoadingScreen;
 import com.example.omarmetwally.schoolcourse.student.mycourses_adapter;
 import com.example.omarmetwally.schoolcourse.student.mycourses_getdata;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -31,11 +33,16 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ApplyForCenterFragment extends Fragment {
 
@@ -61,9 +68,37 @@ public class ApplyForCenterFragment extends Fragment {
         mreRecyclerView=vv.findViewById(R.id.recApply);
         mreRecyclerView.setHasFixedSize(true);
         mreRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("token", MODE_PRIVATE);
+        final String Auth="Bearer "+ prefs.getString("token",null);
+
+
+
+        OkHttpClient okHttpClient=new OkHttpClient.Builder().
+                addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request original=chain.request();
+
+                        Request.Builder requestBilder=original.newBuilder()
+                                .addHeader("Authorization",Auth)
+                                .method(original.method(),original.body());
+
+                        Request request=requestBilder.build();
+
+                        return chain.proceed(request);
+                    }
+                }).build();
+
+
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(test.Base_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<apply_forCenterData>> call=a.applyy();

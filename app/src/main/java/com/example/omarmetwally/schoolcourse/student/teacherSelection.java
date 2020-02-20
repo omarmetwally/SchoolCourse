@@ -1,6 +1,7 @@
 package com.example.omarmetwally.schoolcourse.student;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +18,13 @@ import android.widget.Toast;
 import com.example.omarmetwally.schoolcourse.Api;
 import com.example.omarmetwally.schoolcourse.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +35,7 @@ public class teacherSelection extends AppCompatActivity {
 
     private  static final  String [] con=new String[]{"basmla","el safwa"};
 
-    String centerN,centerID,ID;
+    String centerN,centerID,clssID;
     String subN,subID,stageN,stageID;
     String d,Sd,c,t1,t2;
 
@@ -56,6 +61,8 @@ public class teacherSelection extends AppCompatActivity {
     RecyclerView mreRecyclerView;
     TextView tName;
     String j,id;
+    OkHttpClient okHttpClient;
+     String Auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,19 @@ public class teacherSelection extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(teacherSelection.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView = findViewById(R.id.recyclerView);
+
+
+
+
+
+        SharedPreferences prefs = getSharedPreferences("token", MODE_PRIVATE);
+
+
+        Auth="Bearer "+ prefs.getString("token",null);
+
+
+
+
 
         v=(View)findViewById(R.id.divider2);
 
@@ -91,11 +111,26 @@ public class teacherSelection extends AppCompatActivity {
 
 
 
+         okHttpClient=new OkHttpClient.Builder().
+                addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request original=chain.request();
 
+                        Request.Builder requestBilder=original.newBuilder()
+                                .addHeader("Authorization",Auth)
+                                .method(original.method(),original.body());
+
+                        Request request=requestBilder.build();
+
+                        return chain.proceed(request);
+                    }
+                }).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/UserSelection/"+id+"/Centers/")
+                .baseUrl("https://stc-api.herokuapp.com/api/UserSelection/"+id+"/Centers/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<centerGetData>> call=a.mycenters();
@@ -223,8 +258,9 @@ public class teacherSelection extends AppCompatActivity {
         typedata.clear();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/UserSelection/"+tid+"/"+cid+"/"+sub+"/"+stg+"/class/")
+                .baseUrl("https://stc-api.herokuapp.com/api/UserSelection/"+tid+"/"+cid+"/"+sub+"/"+stg+"/class/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<classesGetData>> call=a.classesData();
@@ -238,6 +274,7 @@ public class teacherSelection extends AppCompatActivity {
                     d=post.getDay();
                     Sd=post.getStartDay();
                     c=post.getCapacity();
+                    clssID=post.getClassId();
                     t1=post.getStartTime();
                     t2=post.getEndTime();
                     String p=post.getPrice();
@@ -249,6 +286,7 @@ public class teacherSelection extends AppCompatActivity {
                     post.setStartTime(t1);
                     post.setEndTime(t2);
                     post.setPrice(p);
+                    post.setClassId(clssID);
 
                     typedata.add(post);
 
@@ -262,6 +300,8 @@ public class teacherSelection extends AppCompatActivity {
 
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
+
+
 
             }
 
@@ -304,8 +344,9 @@ public class teacherSelection extends AppCompatActivity {
         lststageID.add(null);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/UserSelection/"+tid+"/"+cid+"/Subjects/")
+                .baseUrl("https://stc-api.herokuapp.com/api/UserSelection/"+tid+"/"+cid+"/Subjects/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         a = retrofit.create(Api.class);
         final Call<List<subjectGetData>> call=a.subData();

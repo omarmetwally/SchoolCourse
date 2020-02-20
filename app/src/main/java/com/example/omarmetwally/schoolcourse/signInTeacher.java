@@ -1,6 +1,7 @@
 package com.example.omarmetwally.schoolcourse;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -8,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.omarmetwally.schoolcourse.student.Main2Activity;
 import com.example.omarmetwally.schoolcourse.teacher.TeacherMain;
@@ -23,6 +25,7 @@ public class signInTeacher extends AppCompatActivity {
     EditText user,pass;
     TextView regi;
     TextView sign;
+    String tkk;
     boolean in=false;
     private  Api a;
     @Override
@@ -104,7 +107,7 @@ public class signInTeacher extends AppCompatActivity {
         }
 
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/User/")
+                .baseUrl("https://stc-api.herokuapp.com/api/User/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         a= retrofit.create(Api.class);
@@ -119,6 +122,13 @@ public class signInTeacher extends AppCompatActivity {
             public void onResponse(Call<UserLoginPost> call, Response<UserLoginPost> response) {
 
 
+                if(response.body()!=null)
+                    tkk=response.body().getToken();
+
+
+                SharedPreferences.Editor editor = getSharedPreferences("token", MODE_PRIVATE).edit();
+                editor.putString("token", tkk);
+                editor.apply();
 
                 if(!response.isSuccessful())
                 {
@@ -132,8 +142,9 @@ public class signInTeacher extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserLoginPost> call, Throwable t) {
-                startActivity(new Intent(signInTeacher.this,TeacherMain.class));
+                //startActivity(new Intent(signInTeacher.this,TeacherMain.class));
 
+                Toast.makeText(signInTeacher.this,"Check your internet connection",Toast.LENGTH_LONG).show();
 
 
 
@@ -162,3 +173,29 @@ public class signInTeacher extends AppCompatActivity {
 
 }
 
+ /*call.enqueue(new Callback<UserLoginPost>() {
+@Override
+public void onResponse(Call<UserLoginPost> call, Response<UserLoginPost> response) {
+
+
+
+        if(!response.isSuccessful())
+        {
+        user.setError("Email or password is wrong");
+        user.requestFocus();
+        return;
+
+        }
+        startActivity(new Intent(signInTeacher.this,TeacherMain.class));
+        }
+
+@Override
+public void onFailure(Call<UserLoginPost> call, Throwable t) {
+        startActivity(new Intent(signInTeacher.this,TeacherMain.class));
+
+
+
+
+        // startActivity(new Intent(signIn.this,TeacherSearch.class));
+        }
+        })*/

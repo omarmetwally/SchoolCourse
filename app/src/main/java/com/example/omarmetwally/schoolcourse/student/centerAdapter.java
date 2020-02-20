@@ -22,11 +22,17 @@ public class centerAdapter extends RecyclerView.Adapter<centerAdapter.ViewHolder
 
 
 
+    String c=new String("omars");
+
+
 
     public  centerAdapter(Context context, ArrayList<centerGetData> contact){
 
         content=contact;
         mContext = context;
+
+
+
     }
 
 
@@ -70,5 +76,7 @@ public class centerAdapter extends RecyclerView.Adapter<centerAdapter.ViewHolder
 
 
         }
+
+
     }
 }

@@ -68,7 +68,7 @@ public class dataAdapter extends ArrayAdapter<GetTeacher> {
 
        // PicassoClient.downloadImage(context,mcontact.get(position).getImageurl(),viewHolder.pic);
 
-        viewHolder.name.setText(data.gettFirstName());
+        viewHolder.name.setText(data.getFirstName());
         viewHolder.subj.setText(data.getSubject().toString());
         viewHolder.cente.setText(data.getCity().toString());
         viewHolder.school.setText(data.getStageName().toString());

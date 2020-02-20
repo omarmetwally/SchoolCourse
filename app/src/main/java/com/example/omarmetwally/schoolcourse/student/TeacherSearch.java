@@ -135,7 +135,7 @@ public class TeacherSearch extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.42.0.233:45455/api/")
+                .baseUrl("https://stc-api.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         a = retrofit.create(Api.class);
@@ -249,8 +249,8 @@ public class TeacherSearch extends AppCompatActivity {
 
                     GetTeacher t = new GetTeacher();
 
-                    fname = post.gettFirstName();
-                    lname = post.gettLastName();
+                    fname = post.getFirstName();
+                    lname = post.getLastName();
                     stage = post.getStageName();
                     center = post.getCity();
                     subject = post.getSubject();
@@ -261,7 +261,7 @@ public class TeacherSearch extends AppCompatActivity {
 
                             ||center.toString().toLowerCase().contains(search.getText().toString().toLowerCase()))
                             ) {
-                        t.settFirstName(fname + " " + lname);
+                        t.setFirstName(fname + " " + lname);
                         t.setCity(center);
                         t.setStageName(stage);
                         t.setSubject(subject);
@@ -298,12 +298,12 @@ public class TeacherSearch extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                        Toast.makeText(TeacherSearch.this,""+typeData2.get(position).gettFirstName(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(TeacherSearch.this,""+typeData2.get(position).getFirstName(),Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(TeacherSearch.this, teacherSelection.class);
 
                         i.putExtra("id", typeData2.get(position).getTid());
-                        i.putExtra("name", typeData2.get(position).gettFirstName());
+                        i.putExtra("name", typeData2.get(position).getFirstName());
                         i.putExtra("subject", typeData2.get(position).getSubject());
 
                         startActivity(i);
@@ -344,8 +344,8 @@ public class TeacherSearch extends AppCompatActivity {
 
                     GetTeacher t = new GetTeacher();
 
-                    fname = post.gettFirstName();
-                    lname = post.gettLastName();
+                    fname = post.getFirstName();
+                    lname = post.getLastName();
                     stage = post.getStageName();
                     center = post.getCity();
                     subject = post.getSubject();
@@ -356,7 +356,7 @@ public class TeacherSearch extends AppCompatActivity {
                             ||lname.toLowerCase().contains((search.getText().toString().toLowerCase()))
                             ||lname.contains((search.getText().toString()))
                             ) {
-                        t.settFirstName(fname + " " + lname);
+                        t.setFirstName(fname + " " + lname);
                         t.setCity(center);
                         t.setStageName(stage);
                         t.setSubject(subject);
@@ -394,12 +394,12 @@ public class TeacherSearch extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                        Toast.makeText(TeacherSearch.this,""+typeData2.get(position).gettFirstName(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(TeacherSearch.this,""+typeData2.get(position).getFirstName(),Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(TeacherSearch.this, teacherSelection.class);
 
                         i.putExtra("id", typeData2.get(position).getTid());
-                        i.putExtra("name", typeData2.get(position).gettFirstName());
+                        i.putExtra("name", typeData2.get(position).getFirstName());
                         i.putExtra("subject", typeData2.get(position).getSubject());
                         startActivity(i);
 
@@ -438,8 +438,8 @@ public class TeacherSearch extends AppCompatActivity {
 
                     GetTeacher t = new GetTeacher();
 
-                    fname = post.gettFirstName();
-                    lname = post.gettLastName();
+                    fname = post.getFirstName();
+                    lname = post.getLastName();
                     stage = post.getStageName();
                     center = post.getCity();
                     subject = post.getSubject();
@@ -449,7 +449,7 @@ public class TeacherSearch extends AppCompatActivity {
                     if (subject.toString().contains(search.getText().toString())
 
                             ||subject.toString().toLowerCase().contains(search.getText().toString().toLowerCase())) {
-                        t.settFirstName(fname + " " + lname);
+                        t.setFirstName(fname + " " + lname);
                         t.setCity(center);
                         t.setStageName(stage);
                         t.setSubject(subject);
@@ -491,7 +491,7 @@ public class TeacherSearch extends AppCompatActivity {
                         Intent i = new Intent(TeacherSearch.this, teacherSelection.class);
 
                         i.putExtra("id", typeData2.get(position).getTid());
-                        i.putExtra("name", typeData2.get(position).gettFirstName());
+                        i.putExtra("name", typeData2.get(position).getFirstName());
                         i.putExtra("subject", typeData2.get(position).getSubject());
                         startActivity(i);
                     }
@@ -513,8 +513,8 @@ public class TeacherSearch extends AppCompatActivity {
 
             GetTeacher t = new GetTeacher();
 
-            fname = post.gettFirstName();
-            lname = post.gettLastName();
+            fname = post.getFirstName();
+            lname = post.getLastName();
             stage = post.getStageName();
             center = post.getCity();
             subject = post.getSubject();
@@ -523,7 +523,7 @@ public class TeacherSearch extends AppCompatActivity {
 
 
 
-            t.settFirstName(fname + " " + lname);
+            t.setFirstName(fname + " " + lname);
             t.setCity(center);
             t.setStageName(stage);
 
@@ -554,7 +554,7 @@ public class TeacherSearch extends AppCompatActivity {
                 Intent i = new Intent(TeacherSearch.this, teacherSelection.class);
 
                 i.putExtra("id", typeData.get(position).getTid());
-                i.putExtra("name", typeData.get(position).gettFirstName());
+                i.putExtra("name", typeData.get(position).getFirstName());
                // i.putExtra("subject", typeData.get(position).getSubject());
 
                 startActivity(i);

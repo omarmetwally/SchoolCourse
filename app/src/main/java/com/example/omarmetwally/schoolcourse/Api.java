@@ -5,6 +5,7 @@ import com.example.omarmetwally.schoolcourse.student.MyTimeTableGetData;
 import com.example.omarmetwally.schoolcourse.student.centerGetData;
 import com.example.omarmetwally.schoolcourse.student.classesGetData;
 import com.example.omarmetwally.schoolcourse.student.mycourses_getdata;
+import com.example.omarmetwally.schoolcourse.student.reservePost;
 import com.example.omarmetwally.schoolcourse.student.subjectGetData;
 import com.example.omarmetwally.schoolcourse.teacher.apply_forCenterData;
 import com.example.omarmetwally.schoolcourse.teacher.public_privateClassesContent;
@@ -29,18 +30,21 @@ public interface Api {
 
     );*/
 
+
    @POST("registrationStudent")
     Call<UserRegPost>creatPostStudent(@Body UserRegPost userRegPost);
 
    @POST("registrationTeacher")
     Call<UserRegPost>creatPostTeacher(@Body UserRegPost userRegPost);
 
-    @POST("login")
-    Call<UserLoginPost>userLogin(@Body UserLoginPost userLoginPost);
+   @POST("login")
+   Call<UserLoginPost>userLogin(@Body UserLoginPost userLoginPost);
+
+   @POST("reserver")
+   Call<reservePost>reserve(@Body reservePost reservePost);
 
 
-
-    @GET("Search/getTeachersWithCenter44")
+ @GET("Search/getTeachersWithCenter")
     Call<List<GetTeacher>>getTeacher();
 
 
